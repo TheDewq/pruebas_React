@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { useLayoutEffect } from 'react';
 import { useState } from 'react';
+import bootstrap from 'bootstrap'
 
 
 function App(){
@@ -17,12 +18,8 @@ function App(){
     function Number_button(props){
       return(
         <button
-          style={{
-            height: '48px',
-            width: '48px',
-            borderRadius: 10,
-            textAlign: 'center'
-          }}
+          className='button-30'
+          role='button'
 
           onClick={
             ()=>{
@@ -38,16 +35,10 @@ function App(){
     function Operator_button(props){
       return(
         <button
-          style={{
-            height: '48px',
-            width: '48px',
-            borderRadius: 10,
-            textAlign: 'center'
-          }}
+          className='button-30'
 
           onClick={
             ()=>{
-              console.log(!isNaN(parseInt(expression.substring(expression.length - 1))))
               if(last_substr_verification()){    
                 setExpression(expression += props.operator)
 
@@ -66,15 +57,19 @@ function App(){
     function Result_Button(){
       return(
         <button
-        style={{
-          height: '48px',
-          width: '48px',
-          borderRadius: 10,
-          textAlign: 'center'
-        }}
+        
+        className='button-30'
+        role='button'
+        
         onClick={
           ()=>{
-            last_substr_verification() ? setExpression(eval(expression)) : setExpression(eval(delete_last_substr))
+            var rpt;
+            if(last_substr_verification()){
+              rpt = eval(expression)
+             }else{
+               rpt = (eval(delete_last_substr()))
+             }
+             setExpression(String(rpt))
           }
         }
         >
@@ -85,7 +80,9 @@ function App(){
 
     function Display(){
       return(
-        <div>
+        <div
+          className='display'
+        >
           <h1>
             {expression}
           </h1>
@@ -95,31 +92,42 @@ function App(){
 
     return(
       <>
-        <Display />
-        <div> 
-          <div>
-            <Number_button num="1"/>
-            <Number_button num="2"/>
-            <Number_button num="3"/>
-            <Operator_button operator="+" />
-          </div>
-          <div>
-            <Number_button num="4"/>
-            <Number_button num="5"/>
-            <Number_button num="6"/>
-            <Operator_button operator="-" />
-          </div>
-          <div>
-            <Number_button num="7"/>
-            <Number_button num="8"/>
-            <Number_button num="9"/>
-            <Operator_button operator="*" />
-          </div>
-          <div>
-            <Number_button num="0"/>
-            <Operator_button operator="/" />
-            <Result_Button />
-          </div>
+        <div>
+          <h1>
+            Calculadora React!
+          </h1>
+        </div>
+        <div
+          className='main_div container'
+        > 
+          <div 
+          className='col'>
+            <Display />
+              <div className='row'>
+                <Number_button num="1"/>
+                <Number_button num="2"/>
+                <Number_button num="3"/>
+                <Operator_button operator="+" />
+              </div>
+              <div className='row'>
+                <Number_button num="4"/>
+                <Number_button num="5"/>
+                <Number_button num="6"/>
+                <Operator_button operator="-" />
+              </div>
+              <div  className='row'>
+                <Number_button num="7"/>
+                <Number_button num="8"/>
+                <Number_button num="9"/>
+                <Operator_button operator="*" />
+              </div>
+              <div  className='row'>
+                <Number_button num="0"/>
+                <Operator_button operator="/" />
+                <Result_Button />
+              </div>
+              
+            </div>
         </div>
       </>
     )
