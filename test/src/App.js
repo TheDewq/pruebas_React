@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { useLayoutEffect } from 'react';
 import { useState } from 'react';
-import bootstrap from 'bootstrap'
+
 
 
 function App(){
